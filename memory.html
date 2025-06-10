@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Memories Zone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Thai', sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom right, #fefcea, #f1daff);
+      padding: 40px;
+      overflow-x: hidden;
+    }
+    .password-section {
+      margin-top: 30px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid pink;
+      border-radius: 10px;
+      margin: 20px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #ffa0b2;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 10px;
+      margin: 30px auto;
+      padding: 10px;
+      max-width: 90%;
+    }
+    .carousel img {
+      scroll-snap-align: center;
+      width: 300px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .music-player {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 320px;
+      margin: 20px auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .song-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .song-text {
+      text-align: left;
+      margin-left: 10px;
+    }
+    .song-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .song-artist {
+      font-size: 13px;
+      color: gray;
+    }
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+    .envelope {
+      margin: 40px auto;
+      width: 100px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+    .letter {
+      display: none;
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      margin: 30px auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.8;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎞️ Memories Zone</h1>
+
+  <div class="password-section" id="password-section">
+    <input type="password" id="password" placeholder="ใส่รหัส Bibiejeen" />
+    <button onclick="checkPassword()">เข้าสู่ความทรงจำ</button>
+  </div>
+
+  <div class="carousel" id="carousel-section" style="display:none;">
+    <img src="https://i.postimg.cc/5Hg12gq0/1.png" alt="รูป1">
+    <img src="https://i.postimg.cc/75Qnr8jY/2.png" alt="รูป2">
+    <img src="https://i.postimg.cc/N2fxwsGF/3.png" alt="รูป3">
+    <img src="https://i.postimg.cc/0zpKcgxB/4.png" alt="รูป4">
+  </div>
+
+  <div class="music-player" id="music-section" style="display:none;">
+    <div class="song-info">
+      <div class="song-text">
+        <div class="song-title">จูบ(Kiss)</div>
+        <div class="song-artist">Jetset'er</div>
+      </div>
+    </div>
+    <audio controls autoplay>
+      <source src="https://files.catbox.moe/v8ne1m.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div class="envelope" id="envelope-section" style="display:none;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099199.png" class="envelope" onclick="showLetter()" alt="envelope">
+  </div>
+
+  <div class="letter" id="letter" style="display:none;">
+    <p>
+      เค้าดีใจที่ได้รู้จักจีนนะคะ อยู่กับเธอแล้วเค้ามีความสุขมากๆ เค้าเลยอยากทำอันนี้มาให้เธอ<br><br>
+      เค้าเขียนโค้ดไม่ค่อยเก่งเท่าไหร่แต่เต็มใจทำให้เธอมากๆ เจอกันแล้วเรามาถ่ายรูปกันนะเธอ ไม่อยากแคปจากวิดีโอคอลแล้ว<br><br>
+      ส่วนวันนี้เค้าอยากบอกเธอว่าเค้า...<br><br>
+      เค้ารักจีนมากๆ จนอยากบอกใครต่อใครแล้วว่าเราเป็นแฟนกัน ❤️<br><br>
+      ไม่รู้ว่ามันจะเร็วไปไหม...<br>
+      คบกับเค้านะคะ ที่รัก 🥺
+    </p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === "Bibiejeen") {
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("carousel-section").style.display = "block";
+        document.getElementById("music-section").style.display = "block";
+        document.getElementById("envelope-section").style.display = "block";
+      } else {
+        alert("รหัสไม่ถูกต้องน้าา 🥺");
+      }
+    }
+
+    function showLetter() {
+      document.getElementById("letter").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
